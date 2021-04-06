@@ -1,6 +1,6 @@
 export enum loginFormElements {
   emailInput = "#login-email",
-  passwordInput = "#login-email",
+  passwordInput = "#login-password",
   loginButton = `button[uitestid="login-sign-in-button"]`,
   wrongCredentialsAlert = `div[uitestid="login-wrong-credentials-field"]`,
 }

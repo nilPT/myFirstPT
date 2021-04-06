@@ -9,11 +9,11 @@ import {
 When(
   "I fulfill the login form with the credentials",
   (credentials: TableDefinition) => {
-    cy.get(loginFormElements.emailInput)
-      .type(credentials.rowsHash().email)
-      .end()
-      .get(loginFormElements.passwordInput)
-      .type(credentials.rowsHash().password);
+    cy.get(loginFormElements.emailInput).type(credentials.rowsHash().email);
+
+    cy.get(loginFormElements.passwordInput).type(
+      credentials.rowsHash().password
+    );
   }
 );
 
@@ -25,11 +25,14 @@ When("I click the recover password link", () => {
   cy.contains(loginFormElementsByText.recoverLink).click();
 });
 
-When("I fulfill the recovery email like {string}", (email: string) => {
-  cy.get(recoverFormElements.emailInput).type(email);
-  cy.contains("Send").click();
-  cy.get(recoverFormElements.successAlert).should("be.visible");
-});
+When(
+  "I fulfill the recovery email like {string} and click send",
+  (email: string) => {
+    cy.get(recoverFormElements.emailInput).type(email);
+    cy.contains("Send").click();
+    cy.get(recoverFormElements.successAlert).should("be.visible");
+  }
+);
 
 Then("I see a warning for wrong credentials", () => {
   cy.get(loginFormElements.wrongCredentialsAlert).should("be.visible");
